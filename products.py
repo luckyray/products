@@ -1,14 +1,18 @@
+import os # operating system
+
 products = []
-# read from file
-with open('products.csv','r', encoding = 'utf-8') as f:
-    for line in f:
-        if 'Product Name' in line:
-            continue # escape this loop, jump to next loop
-        name, price = line.strip().split(',')
+if os.path.isfile('products.csv'):
+    print('Yeah! found it!')
+    # ask user to input
+    while True:
+        name = input('Please enter the product name: ')
+        if name == 'q':
+            break
+        price = input('Please enter the product price: ')
         products.append([name, price])
-
-print(products)
-
+    print(products)   
+else:
+    print('We can not find it')
 
 # ask user to input
 while True:
@@ -17,7 +21,9 @@ while True:
         break
     price = input('Please enter the product price: ')
     products.append([name, price])
-print(products)
+print(products)   
+
+
 
 
 # print all purchase record
@@ -31,3 +37,13 @@ with open('products.csv', 'w',encoding='utf-8') as f:
     f.write('Product Name, Product Price\n')
     for  p in products:
         f.write(p[0] + ',' + p[1] + '\n')
+        
+
+# read from file
+with open('products.csv','r', encoding = 'utf-8') as f:
+    for line in f:
+        if 'Product Name' in line:
+            continue # escape this loop, jump to next loop
+        name, price = line.strip().split(',')
+        products.append([name, price])
+print(products)
